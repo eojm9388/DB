@@ -78,7 +78,8 @@ GROUP BY Composer
 ORDER BY AVG(Bytes) DESC;
 
 SELECT Composer, AVG(Milliseconds/60000) AS play_time from tracks
-WHERE play_time < 10
-GROUP BY Composer;
+GROUP BY Composer
+HAVING play_time < 10;
+
 
 

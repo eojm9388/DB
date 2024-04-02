@@ -1,6 +1,4 @@
 -- 공통
-SELECT * FROM articles;
-SELECT * FROM users;
 DROP TABLE articles;
 DROP TABLE users;
 PRAGMA table_info('articles');
@@ -21,6 +19,9 @@ CREATE TABLE articles (
     REFERENCES users(id)
 );
 
+SELECT * FROM articles;
+SELECT * FROM users;
+
 INSERT INTO 
   users (name)
 VALUES 
@@ -39,5 +40,21 @@ VALUES
 
 
 -- INNER JOIN
+SELECT * FROM articles
+INNER JOIN users
+ON users.id = articles.userId;
+
+SELECT articles.id, name, title FROM users
+INNER JOIN articles
+ON users.id = articles.userId
+WHERE name = '하석주';
 
 -- LEFT JOIN
+SELECT * FROM users
+LEFT JOIN articles
+ON users.id = articles.userId;
+
+SELECT name FROM users
+LEFT JOIN articles
+ON users.id = articles.userId
+WHERE title IS NULL;
