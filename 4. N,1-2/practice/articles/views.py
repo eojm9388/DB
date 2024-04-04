@@ -12,8 +12,9 @@ def index(request):
     }
     return render(request, 'articles/index.html', context)
 
-
+@login_required
 def detail(request, pk):
+    print(request.GET)
     article = Article.objects.get(pk=pk)
     comments = article.comment_set.all()
     comment_form = CommentForm()
