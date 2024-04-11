@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ profile_owner.username }}의 프로필</h1>
+{% if request.user == profile_owner %}
+<form action="{% url "accounts:logout" %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="LOGOUT">
+{% endif %}
+</form>
+<hr>
+
+{% if request.user != profile_owner %}
+<form action="{% url "accounts:follow" profile_owner.pk %}" method="post">
+  {% csrf_token %}
+  {% if request.user in profile_owner.followers.all %}
+  <input type="submit" value="팔로우 취소">
+  {% else %}
+  <input type="submit" value="팔로우">
+  {% endif %}
+</form>
+{% endif %}
+{% endblock content %}
+
